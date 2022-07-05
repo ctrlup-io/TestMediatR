@@ -66,5 +66,18 @@ namespace TestMediatR.Controllers
 
 			return StatusCode(202, "Update OK");
         }
+
+        [HttpDelete("{id:int}")]
+		public async Task<ActionResult> DeleteProduct(int id)
+        {
+			if (!await _productService.CheckIfProductExists(id))
+			{
+				return BadRequest("L'id ne correspond pas à un produit existant.");
+			}
+
+			await _productService.DeleteProduct(id);
+
+			return StatusCode(202, "Delete OK");
+		}
 	}
 }

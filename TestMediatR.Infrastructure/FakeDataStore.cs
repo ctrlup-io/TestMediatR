@@ -45,6 +45,12 @@ namespace TestMediatR.Infrastructure
 			await Task.CompletedTask;
 		}
 
+		public async Task DeleteProduct(int id)
+        {
+			_products.Remove(_products.Single(p => p.Id == id));
+			await Task.CompletedTask;
+		}
+
 		private void SetEvent(Product product, string evt)
         {
 			if(product == null || string.IsNullOrWhiteSpace(evt))

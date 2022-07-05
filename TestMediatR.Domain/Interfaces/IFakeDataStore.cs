@@ -14,5 +14,6 @@ namespace TestMediatR.Domain.Interfaces
         Task EventOccured(Product product, string evt);
         Task<bool> CheckIfProductExists(int id);
         Task UpdateProduct(Product product);
+        Task DeleteProduct(int id);
     }
 }

@@ -39,5 +39,10 @@ namespace TestMediatR.Application
         {
             await _mediator.Send(new UpdateProductCommand(id, name));
         }
+
+        public async Task DeleteProduct(int id)
+        {
+            await _mediator.Send(new DeleteProductCommand(id));
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace TestMediatR.Domain.Interfaces
         Task<bool> CheckIfProductExists(int id);
         Task AddProduct(Product product);
         Task UpdateProduct(int id, string name);
+        Task DeleteProduct(int id);
     }
 }
