@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using TestMediatR;
 using TestMediatR.Application;
@@ -7,12 +8,16 @@ using TestMediatR.Domain;
 using TestMediatR.Domain.Behaviors;
 using TestMediatR.Domain.Interfaces;
 using TestMediatR.Infrastructure;
+using TestMediatR.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 var services = builder.Services;
-
+services.AddDbContext<DataStoreContext>(options =>
+{
+    options.UseSqlServer(configuration.GetConnectionString("WebApiDatabase"));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
