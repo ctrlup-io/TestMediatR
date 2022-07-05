@@ -1,4 +1,4 @@
-# TestMediatR
+# TestMediatR (CRUD)
 Solution de test de MediatR en architecture DDD.
 Particularié : La couche "Application" n'est pas celle du projet principal. Ceci afin de déporter la logique "métier" ailleurs que sur le projet qui contient le controller.
 Ceci n'est pas iso avec l'archi préconisée par Microsoft.
