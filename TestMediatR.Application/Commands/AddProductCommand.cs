@@ -3,5 +3,5 @@ using TestMediatR.Domain;
 
 namespace TestMediatR.Application.Commands
 {
-    public record AddProductCommand(Product Product) : IRequest<Product>;
+    public record AddProductCommand(Product Product) : IRequest<Guid>;
 }

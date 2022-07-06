@@ -12,7 +12,7 @@ namespace TestMediatR.Infrastructure.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]        
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         [MaxLength(100)]
         public string? Name { get; set; }
         public DateTime? CreationDate { get; set; }

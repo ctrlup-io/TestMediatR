@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace TestMediatR.Application.Commands
 {
-    public record UpdateProductCommand(int id, string name) : IRequest;
+    public record UpdateProductCommand(Guid id, string name) : IRequest;
 }

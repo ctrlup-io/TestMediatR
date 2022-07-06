@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using TestMediatR.Converters;
 using TestMediatR.Domain;
 using TestMediatR.Domain.Interfaces;
 
@@ -9,12 +9,11 @@ namespace TestMediatR.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IMapper _mapper;
+        
         private readonly IProductService _productService;
-        public ProductsController(IProductService productService, IMapper mapper)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,38 +23,36 @@ namespace TestMediatR.Controllers
 
             if (products == null || products.Count() == 0) return NoContent();
 
-            return Ok(_mapper.Map<IEnumerable<ProductContract>>(products));
+            return Ok(products.ToList().ToProductContracts());
         }
 
-        [HttpGet("{id:int}", Name = "GetProductById")]
-        public async Task<ActionResult> GetProductById(int id)
+        [HttpGet("{id:Guid}", Name = "GetProductById")]
+        public async Task<ActionResult> GetProductById(Guid id)
         {
             var product = await _productService.GetProductById(id);
 
             if (product == null) return NoContent();
 
-            return Ok(_mapper.Map<ProductContract>(product));
+            return Ok(product.ToProductContract());
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddProduct([FromBody] ProductContract productContract)
+        public async Task<ActionResult> AddProduct([FromBody] string name)
         {
-            if (productContract == null) return BadRequest("Le produit ne peut pas être null.");
+            if (string.IsNullOrWhiteSpace(name)) return BadRequest("Le produit ne peut pas être null.");
 
-            if (await _productService.CheckIfProductExists(productContract.Id))
+            Product product = new Product
             {
-                return BadRequest("Ce produit existe déjà.");
-            }
-
-            Product product = _mapper.Map<Product>(productContract);
+                Name = name
+            };
 
             await _productService.AddProduct(product);
 
             return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> UpdateProduct([FromRoute] int id, [FromBody] string name)
+        [HttpPut("{id:Guid}")]
+        public async Task<ActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] string name)
         {
             if (!await _productService.CheckIfProductExists(id))
             {
@@ -67,8 +64,8 @@ namespace TestMediatR.Controllers
             return StatusCode(202, "Update OK");
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteProduct(int id)
+        [HttpDelete("{id:Guid}")]
+        public async Task<ActionResult> DeleteProduct(Guid id)
         {
             if (!await _productService.CheckIfProductExists(id))
             {

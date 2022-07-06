@@ -8,12 +8,12 @@ namespace TestMediatR.Application.Handlers
 {
 	public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, Product>
 	{
-		private readonly IFakeDataStore _fakeDataStore;
+		private readonly IDataStoreRepository _dataStoreRepository;
 
-		public GetProductByIdHandler(IFakeDataStore fakeDataStore) => _fakeDataStore = fakeDataStore;
+		public GetProductByIdHandler(IDataStoreRepository dataStoreRepository) => _dataStoreRepository = dataStoreRepository;
 
 		public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken) =>
-			await _fakeDataStore.GetProductById(request.Id);
+			await _dataStoreRepository.GetProductById(request.Id);
 
 	}
 }

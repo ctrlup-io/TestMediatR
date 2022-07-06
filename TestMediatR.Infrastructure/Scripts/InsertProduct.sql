@@ -15,6 +15,7 @@ INSERT INTO [dbo].[Product]
            ([Name]
            ,[CreationDate]
            ,[UpdateDate])
+     OUTPUT inserted.Id
      VALUES
            (@Name
            ,@CreationDate

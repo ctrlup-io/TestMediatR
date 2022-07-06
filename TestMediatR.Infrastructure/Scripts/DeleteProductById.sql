@@ -5,7 +5,7 @@ IF EXISTS(SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Delete_Product_
 DROP PROCEDURE Delete_Product_By_Id
 GO
 
-CREATE PROCEDURE [dbo].[Update_Product_By_Id]
+CREATE PROCEDURE [dbo].[Delete_Product_By_Id]
 	@Id UNIQUEIDENTIFIER
 AS
 BEGIN

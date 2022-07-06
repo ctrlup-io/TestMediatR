@@ -6,16 +6,16 @@ namespace TestMediatR.Application.Handlers
 {
     public class DeleteProductHandler : IRequestHandler<DeleteProductCommand>
     {
-        private readonly IFakeDataStore _fakeDataStore;
+        private readonly IDataStoreRepository _dataStoreRepository;
 
-        public DeleteProductHandler(IFakeDataStore fakeDataStore)
+        public DeleteProductHandler(IDataStoreRepository dataStoreRepository)
         {
-            _fakeDataStore = fakeDataStore;
+            _dataStoreRepository = dataStoreRepository;
         }
 
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            await _fakeDataStore.DeleteProduct(request.id);
+            await _dataStoreRepository.DeleteProduct(request.id);
             return Unit.Value;
         }
     }

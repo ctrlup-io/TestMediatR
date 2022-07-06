@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TestMediatR.Domain.Interfaces
 {
-    public interface IFakeDataStore
+    public interface IDataStoreRepository
     {
-        Task AddProduct(Product product);
+        Task<Guid> AddProduct(Product product);
         Task<IEnumerable<Product>> GetAllProducts();
-        Task<Product> GetProductById(int id);
+        Task<Product> GetProductById(Guid id);
         Task EventOccured(Product product, string evt);
-        Task<bool> CheckIfProductExists(int id);
+        Task<bool> CheckIfProductExists(Guid? id);
         Task UpdateProduct(Product product);
-        Task DeleteProduct(int id);
+        Task DeleteProduct(Guid id);
     }
 }

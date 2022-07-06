@@ -6,13 +6,13 @@ namespace TestMediatR.Application.Handlers
 {
     public class CheckIfProductExistsHandler : IRequestHandler<CheckIfProductExists, bool>
     {
-        private readonly IFakeDataStore _fakeDataStore;
+        private readonly IDataStoreRepository _dataStoreRepository;
 
-        public CheckIfProductExistsHandler(IFakeDataStore fakeDataStore) => _fakeDataStore = fakeDataStore;
+        public CheckIfProductExistsHandler(IDataStoreRepository dataStoreRepository) => _dataStoreRepository = dataStoreRepository;
 
         public async Task<bool> Handle(CheckIfProductExists request, CancellationToken cancellationToken)
         {
-            return await _fakeDataStore.CheckIfProductExists(request.Id);
+            return await _dataStoreRepository.CheckIfProductExists(request.Id);
         }
     }
 }

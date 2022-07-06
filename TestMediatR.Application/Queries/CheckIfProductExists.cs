@@ -2,5 +2,5 @@
 
 namespace TestMediatR.Application.Queries
 {
-    public record CheckIfProductExists(int Id) : IRequest<bool>;
+    public record CheckIfProductExists(Guid? Id) : IRequest<bool>;
 }

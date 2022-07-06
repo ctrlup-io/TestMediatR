@@ -7,19 +7,19 @@ namespace TestMediatR.Application.Handlers
 {
     public class UpdateProductHandler : IRequestHandler<UpdateProductCommand>
     {
-        private readonly IFakeDataStore _fakeDataStore;
+        private readonly IDataStoreRepository _dataStoreRepository;
 
-        public UpdateProductHandler(IFakeDataStore fakeDataStore)
+        public UpdateProductHandler(IDataStoreRepository dataStoreRepository)
         {
-            _fakeDataStore = fakeDataStore;
+            _dataStoreRepository = dataStoreRepository;
         }
 
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            Product product = await _fakeDataStore.GetProductById(request.id);
+            Product product = await _dataStoreRepository.GetProductById(request.id);
             product.Name = request.name;
-            await _fakeDataStore.UpdateProduct(product);
-            await _fakeDataStore.EventOccured(product, "update");
+            await _dataStoreRepository.UpdateProduct(product);
+            await _dataStoreRepository.EventOccured(product, "update");
             return Unit.Value;
         }
 

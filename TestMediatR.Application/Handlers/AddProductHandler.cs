@@ -5,18 +5,19 @@ using TestMediatR.Domain.Interfaces;
 
 namespace TestMediatR.Application.Handlers
 {
-	public class AddProductHandler : IRequestHandler<AddProductCommand, Product>
+	public class AddProductHandler : IRequestHandler<AddProductCommand, Guid>
 	{
-		private readonly IFakeDataStore _fakeDataStore;
+		private readonly IDataStoreRepository _dataStoreRepository;
 
-		public AddProductHandler(IFakeDataStore fakeDataStore) => _fakeDataStore = fakeDataStore;
+		public AddProductHandler(IDataStoreRepository dataStoreRepository) => _dataStoreRepository = dataStoreRepository;
 
-		public async Task<Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
+		public async Task<Guid> Handle(AddProductCommand request, CancellationToken cancellationToken)
 		{
-			await _fakeDataStore.AddProduct(request.Product);
-			await _fakeDataStore.EventOccured(request.Product, "create");
-			return request.Product;
+			Guid id = await _dataStoreRepository.AddProduct(request.Product);
+			await _dataStoreRepository.EventOccured(request.Product, "create");
+			return id;
 		}
+
 
     }
 }

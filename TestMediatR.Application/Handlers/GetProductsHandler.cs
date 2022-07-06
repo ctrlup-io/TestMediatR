@@ -7,11 +7,11 @@ namespace TestMediatR.Application.Handlers
 {
 	public class GetProductsHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
 	{
-		private readonly IFakeDataStore _fakeDataStore;
+		private readonly IDataStoreRepository _dataStoreRepository;
 
-		public GetProductsHandler(IFakeDataStore fakeDataStore) => _fakeDataStore = fakeDataStore;
+		public GetProductsHandler(IDataStoreRepository dataStoreRepository) => _dataStoreRepository = dataStoreRepository;
 
 		public async Task<IEnumerable<Product>> Handle(GetProductsQuery request,
-			CancellationToken cancellationToken) => await _fakeDataStore.GetAllProducts();
+			CancellationToken cancellationToken) => await _dataStoreRepository.GetAllProducts();
 	}
 }
