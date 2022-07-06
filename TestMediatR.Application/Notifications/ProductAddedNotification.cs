@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using TestMediatR.Domain;
 
-namespace TestMediatR.Domain.Notifications
+namespace TestMediatR.Application.Notifications
 {
     public record ProductAddedNotification(Product Product) : INotification;
 }

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMediatR", "TestMediatR\TestMediatR.csproj", "{ADC719D5-CADD-4AF9-AD33-0D4E504FD882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMediatR.Infrastructure", "TestMediatR.Infrastructure\TestMediatR.Infrastructure.csproj", "{21C88863-00BE-4DA0-BBDB-EBDBB91E6B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMediatR.Infrastructure", "TestMediatR.Infrastructure\TestMediatR.Infrastructure.csproj", "{21C88863-00BE-4DA0-BBDB-EBDBB91E6B63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMediatR.Domain", "TestMediatR.Domain\TestMediatR.Domain.csproj", "{1B28AEDE-A999-4254-945F-E4EF52F1A0BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMediatR.Domain", "TestMediatR.Domain\TestMediatR.Domain.csproj", "{1B28AEDE-A999-4254-945F-E4EF52F1A0BD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMediatR.Application", "TestMediatR.Application\TestMediatR.Application.csproj", "{33A75351-C23D-4AA7-A985-539FE1477DF3}"
 EndProject

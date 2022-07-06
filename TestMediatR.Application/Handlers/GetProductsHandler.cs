@@ -1,13 +1,9 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestMediatR.Application.Queries;
+using TestMediatR.Domain;
 using TestMediatR.Domain.Interfaces;
-using TestMediatR.Domain.Queries;
 
-namespace TestMediatR.Domain.Handlers
+namespace TestMediatR.Application.Handlers
 {
 	public class GetProductsHandler : IRequestHandler<GetProductsQuery, IEnumerable<Product>>
 	{

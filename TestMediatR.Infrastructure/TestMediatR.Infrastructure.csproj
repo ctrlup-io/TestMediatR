@@ -22,4 +22,22 @@
     <ProjectReference Include="..\TestMediatR.Domain\TestMediatR.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Scripts\DeleteProductById.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\InsertProduct.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\SelectAllProduct.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\SelectProductById.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Scripts\Update_Product_By_Id.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

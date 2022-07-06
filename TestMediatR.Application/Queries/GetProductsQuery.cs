@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using TestMediatR.Domain;
 
-namespace TestMediatR.Domain.Queries
+namespace TestMediatR.Application.Queries
 {
     public record GetProductsQuery() : IRequest<IEnumerable<Product>>;   
 }

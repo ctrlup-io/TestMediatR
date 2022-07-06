@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using TestMediatR.Application.Queries;
 using TestMediatR.Domain.Interfaces;
-using TestMediatR.Domain.Queries;
 
-namespace TestMediatR.Domain.Handlers
+namespace TestMediatR.Application.Handlers
 {
     public class CheckIfProductExistsHandler : IRequestHandler<CheckIfProductExists, bool>
     {

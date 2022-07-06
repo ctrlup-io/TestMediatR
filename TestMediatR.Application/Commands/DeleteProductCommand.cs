@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TestMediatR.Domain.Commands
+namespace TestMediatR.Application.Commands
 {
     public record DeleteProductCommand(int id) : IRequest;   
 }

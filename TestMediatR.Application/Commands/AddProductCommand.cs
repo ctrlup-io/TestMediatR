@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using TestMediatR.Domain;
 
-namespace TestMediatR.Domain.Commands
+namespace TestMediatR.Application.Commands
 {
     public record AddProductCommand(Product Product) : IRequest<Product>;
 }

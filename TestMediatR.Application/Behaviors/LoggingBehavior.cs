@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestMediatR.Domain.Behaviors
+namespace TestMediatR.Application.Behaviors
 {
 	public class LoggingBehavior<TRequest, TResponse> :IPipelineBehavior<TRequest, TResponse>
 		where TRequest : IRequest<TResponse>				

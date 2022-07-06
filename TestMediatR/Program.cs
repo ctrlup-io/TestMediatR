@@ -1,17 +1,16 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using TestMediatR;
 using TestMediatR.Application;
+using TestMediatR.Application.Behaviors;
 using TestMediatR.Domain;
-using TestMediatR.Domain.Behaviors;
 using TestMediatR.Domain.Interfaces;
 using TestMediatR.Infrastructure;
 using TestMediatR.Infrastructure.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
+
 // Add services to the container.
 var services = builder.Services;
 services.AddDbContext<DataStoreContext>(options =>

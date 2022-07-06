@@ -1,8 +1,9 @@
 ﻿using MediatR;
-using TestMediatR.Domain.Commands;
+using TestMediatR.Application.Commands;
+using TestMediatR.Domain;
 using TestMediatR.Domain.Interfaces;
 
-namespace TestMediatR.Domain.Handlers
+namespace TestMediatR.Application.Handlers
 {
     public class UpdateProductHandler : IRequestHandler<UpdateProductCommand>
     {

@@ -1,14 +1,9 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestMediatR.Domain.Commands;
+using TestMediatR.Application.Commands;
+using TestMediatR.Domain;
 using TestMediatR.Domain.Interfaces;
-using TestMediatR.Domain.Notifications;
 
-namespace TestMediatR.Domain.Handlers
+namespace TestMediatR.Application.Handlers
 {
 	public class AddProductHandler : IRequestHandler<AddProductCommand, Product>
 	{

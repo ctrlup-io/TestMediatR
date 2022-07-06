@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestMediatR.Domain.Queries
+namespace TestMediatR.Application.Commands
 {
-    public record CheckIfProductExists(int Id) : IRequest<bool>;
+    public record UpdateProductCommand(int id, string name) : IRequest;
 }

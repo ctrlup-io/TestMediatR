@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using TestMediatR.Application.Commands;
+using TestMediatR.Application.Queries;
 using TestMediatR.Domain;
-using TestMediatR.Domain.Commands;
 using TestMediatR.Domain.Interfaces;
-using TestMediatR.Domain.Queries;
 
 namespace TestMediatR.Application
 {
