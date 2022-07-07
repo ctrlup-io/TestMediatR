@@ -1,6 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-
-namespace TestMediatR.Domain
+﻿namespace TestMediatR.Domain
 {
     public class Product
     {

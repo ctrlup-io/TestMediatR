@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestMediatR.Domain;
 using TestMediatR.Domain.Interfaces;
 using TestMediatR.Infrastructure.Entities;
 using Dapper;
+using Microsoft.EntityFrameworkCore;
+using TestMediatR.Infrastructure.Context;
 
 namespace TestMediatR.Infrastructure
 {
@@ -16,49 +13,92 @@ namespace TestMediatR.Infrastructure
     {
         private readonly IMapper _mapper;
         private readonly IDbConnection _dbConnection;
+        private readonly DataStoreContext _dbContext;
 
-        public DataStoreRepository(IMapper mapper, IDbConnection dbConnection) { _mapper = mapper; _dbConnection = dbConnection; }
+        public DataStoreRepository(IMapper mapper, IDbConnection dbConnection, DataStoreContext dbContext) { _mapper = mapper; _dbConnection = dbConnection; _dbContext = dbContext; }
 
         public async Task<Guid> AddProduct(Product product)
         {
-            var request = new
+            var param = new
             {
-                Name = product.Name,
-                CreationDate = product.CreationDate,
-                UpdateDate = product.UpdateDate
+                product.Name,
+                product.CreationDate,
+                product.UpdateDate
             };
 
-           return await _dbConnection.ExecuteScalarAsync<Guid>("Insert_Product", request, commandType: CommandType.StoredProcedure);
+           return await _dbConnection.ExecuteScalarAsync<Guid>(Consts.INSERT_PRODUCT, param, commandType: CommandType.StoredProcedure);
         }
 
-        public Task<bool> CheckIfProductExists(Guid? id)
+        public async Task<bool> CheckIfProductExists(Guid? id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Product.AnyAsync(p => p.Id.Equals(id));
         }
 
-        public Task DeleteProduct(Guid id)
+        public async Task DeleteProduct(Guid id)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                Id = id
+            };
+            await _dbConnection.ExecuteAsync(Consts.DELETE_PRODUCT_BY_ID, param, commandType: CommandType.StoredProcedure);
         }
 
-        public Task EventOccured(Product product, string evt)
+        public async Task EventOccured(Product product, string evt)
         {
-            throw new NotImplementedException();
+            SetEvent(product, evt);
+            await UpdateProduct(product);
         }
 
-        public Task<IEnumerable<Product>> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            throw new NotImplementedException();
+            var results = await _dbConnection.QueryAsync<ProductEntity>(Consts.SELECT_ALL_PRODUCTS, commandType: CommandType.StoredProcedure);
+
+            return _mapper.Map<IEnumerable<Product>>(results);
         }
 
-        public Task<Product> GetProductById(Guid id)
+        public async Task<Product> GetProductById(Guid id)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                Id = id
+            };
+            ProductEntity result = await _dbConnection.QueryFirstAsync<ProductEntity>(Consts.SELECT_PRODUCT_BY_ID, param, commandType: CommandType.StoredProcedure);
+
+            return _mapper.Map<Product>(result);
         }
 
-        public Task UpdateProduct(Product product)
+        public async Task UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            var param = new
+            {
+                product.Id,
+                product.Name,
+                product.CreationDate,
+                product.UpdateDate
+            };
+            await _dbConnection.ExecuteAsync(Consts.UPDATE_PRODUCT_BY_ID, param, commandType: CommandType.StoredProcedure);
+        }
+
+        private static void SetEvent(Product product, string evt)
+        {
+            if (product == null || string.IsNullOrWhiteSpace(evt))
+            {
+                return;
+            }
+
+            switch (evt.ToUpperInvariant())
+            {
+                case Consts.EVENT_CREATE:
+                    product.CreationDate = DateTime.Now;
+                    break;
+                case Consts.EVENT_UPDATE:
+                    product.UpdateDate = DateTime.Now;
+                    break;
+                default:
+                    product.Name = $"{product.Name} evt: {evt}";
+                    break;
+            }
         }
     }
 }
+

@@ -46,9 +46,9 @@ namespace TestMediatR.Controllers
                 Name = name
             };
 
-            await _productService.AddProduct(product);
+            product.Id = await _productService.AddProduct(product);
 
-            return CreatedAtRoute("GetProductById", new { id = product.Id }, product);
+            return CreatedAtRoute("GetProductById", new { id = product.Id }, product.ToProductContract());
         }
 
         [HttpPut("{id:Guid}")]

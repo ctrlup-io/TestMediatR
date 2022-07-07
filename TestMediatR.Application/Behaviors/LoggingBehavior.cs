@@ -1,10 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TestMediatR.Domain.Converters;
 
 namespace TestMediatR.Application.Behaviors
 {
@@ -19,11 +15,11 @@ namespace TestMediatR.Application.Behaviors
 		public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
 			RequestHandlerDelegate<TResponse> next)
 		{
-			_logger.LogInformation($"Handling {typeof(TRequest).Name}");
+			_logger.LogInformation($"Handling {request.ToJson()}");
 
 			var response = await next();
 
-			_logger.LogInformation($"Handled {typeof(TResponse).Name}");
+			_logger.LogInformation($"Handled {request.ToJson()}");
 
 			return response;
 		}

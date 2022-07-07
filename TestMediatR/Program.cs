@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using TestMediatR;
 using TestMediatR.Application;
 using TestMediatR.Application.Behaviors;
 using TestMediatR.Domain;
@@ -22,7 +21,8 @@ services.AddDbContext<DataStoreContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());

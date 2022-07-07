@@ -13,9 +13,9 @@ namespace TestMediatR.Application.Handlers
 
 		public async Task<Guid> Handle(AddProductCommand request, CancellationToken cancellationToken)
 		{
-			Guid id = await _dataStoreRepository.AddProduct(request.Product);
+			request.Product.Id = await _dataStoreRepository.AddProduct(request.Product);
 			await _dataStoreRepository.EventOccured(request.Product, "create");
-			return id;
+			return request.Product.Id.GetValueOrDefault();
 		}
 
 

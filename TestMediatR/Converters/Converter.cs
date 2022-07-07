@@ -2,7 +2,7 @@
 
 namespace TestMediatR.Converters
 {
-    public static class Convertercs
+    public static class Converter
     {
         public static ProductContract? ToProductContract(this Product product)
         {
